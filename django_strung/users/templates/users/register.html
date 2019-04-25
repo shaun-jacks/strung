@@ -1,14 +1,14 @@
 {% extends "strung/base.html" %}
 {% block content %}
   <div class="content-section">
-    <form method="POST">
+    <form action="." method="POST">
       {% csrf_token %}
       <fieldset class="form-group">
-        <legend class="border-bottom mb-4">Join Today!</legend>
-      {{ form }}
+        <legend class="border-bottom mb-4">Create an account</legend>
+      {{ user_form.as_p }}
       </fieldset>
       <div class="form-group">
-        <button class="btn btn-outline-info" type="submit">Sign Up</button>
+        <button class="btn btn-outline-info" type="submit">Create my account</button>
       </div>
 
     </form>
