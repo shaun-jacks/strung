@@ -10,6 +10,30 @@
 
   <title>Strung</title>
 </head>
+<div id ="header" class="container">
+  <span class="logo">Strung</span>
+  {% if request.user.is_authenticated %}
+    <ul class="menu">
+      <li {% if section == "music_feed" %}class="selected"{% endif %}>
+        <a href=" {% url 'music_feed' %}">Music Feed</a>
+      </li>
+      <li {% if section == "Discover" %}class="selected"{% endif %}>
+          <a href="#">Discover</a>
+      </li>
+      <li {% if section == "Profile" %}class="selected"{% endif %}>
+            <a href="#">Profile</a>
+      </li>
+    </ul>
+  {% endif %}
+  <span class="user">
+    {% if request.user.is_authenticated %}
+      Hello {{ request.user.first_name }},
+      <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+      <a href="{% url 'login' %}">Log-in</a>
+    {% endif %}
+  </span>
+</div>
 <body>
   <div class="container">
       {% block content %} {% endblock %}

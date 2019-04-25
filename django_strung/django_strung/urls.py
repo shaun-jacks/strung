@@ -19,7 +19,7 @@ from users import views as users_view
 from strung import views as strung_view
 
 urlpatterns = [
-    path('', strung_view.base, name='strung-base'),
+    path('', include('strung.urls')),
     path('users/', include('users.urls')),
     path('register/', users_view.register, name='register'),
     path('admin/', admin.site.urls),
