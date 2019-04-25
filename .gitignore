@@ -2,3 +2,4 @@
 django_env/
 .DS_Store
 django_strung/settings.py
+django_strung/django_strung/settings.py
