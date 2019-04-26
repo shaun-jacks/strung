@@ -1,6 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
+from django.forms import modelformset_factory
+from .models import Instrument, Profile
 from .forms import LoginForm, UserRegistrationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -55,8 +57,20 @@ def signup(request):
   return render(request, 'users/signup.html')
 
 @login_required
-def profile(request):
-  return render(request,
-    'users/profile.html',
-    {'section': 'profile'})
-
+def edit_profile(request):
+  ProfileFormSet = modelformset_factory(Profile, \
+    fields=['date_of_birth', 'photo', 'instruments', 'bio'])
+  if request.method == 'POST':
+    formset = ProfileFormSet(request.POST, request.FILES)
+    if formset.is_valid():
+      profile = formset.save(commit=False)
+      profile.user = request.user
+      profile.save()
+      return render(request, 'users/edit_profile.html',
+       {'formset' : formset})
+    else:
+      return HttpResponse('Form Invalid')
+  else:
+    formset = ProfileFormSet()
+  return render(request, 'users/edit_profile.html', {'formset' : formset})
+  

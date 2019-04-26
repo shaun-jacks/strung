@@ -1,0 +1,19 @@
+{% extends "strung/base.html" %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block content %}
+  <h1>Edit Profile</h1>
+  <p>Welcome to your profile</p>
+  <form method="post">
+    {% csrf_token %}
+    <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Edit Account</legend>
+      {{ formset.as_p }}
+      </fieldset>
+      <div class="form-group">
+        <button class="btn btn-outline-info" type="submit">Edit profile</button>
+      </div>
+  </form>
+
+{% endblock content %}
