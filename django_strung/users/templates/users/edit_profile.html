@@ -9,8 +9,9 @@
     {% csrf_token %}
     <fieldset class="form-group">
         <legend class="border-bottom mb-4">Edit Account</legend>
-      {{ formset.as_p }}
-      </fieldset>
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}      
+    </fieldset>
       <div class="form-group">
         <button class="btn btn-outline-info" type="submit">Edit profile</button>
       </div>

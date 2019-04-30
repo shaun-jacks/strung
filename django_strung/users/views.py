@@ -3,7 +3,8 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.forms import modelformset_factory
 from .models import Instrument, Profile
-from .forms import LoginForm, UserRegistrationForm
+from .forms import LoginForm, UserRegistrationForm, \
+  UserEditForm, ProfileEditForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 
@@ -57,20 +58,24 @@ def signup(request):
   return render(request, 'users/signup.html')
 
 @login_required
-def edit_profile(request):
-  ProfileFormSet = modelformset_factory(Profile, \
-    fields=['date_of_birth', 'photo', 'instruments', 'bio'])
+def edit(request):
   if request.method == 'POST':
-    formset = ProfileFormSet(request.POST, request.FILES)
-    if formset.is_valid():
-      profile = formset.save(commit=False)
+    user_form = UserEditForm(instance=request.user, \
+      data=request.POST,
+      files=request.FILES)
+    profile_form = ProfileEditForm(instance=request.user.profile, \
+      data=request.POST,
+      files=request.FILES)
+    if user_form.is_valid() and profile_form.is_valid():
+      user_form.save()
+      profile = profile_form.save(commit=False)
       profile.user = request.user
       profile.save()
-      return render(request, 'users/edit_profile.html',
-       {'formset' : formset})
     else:
       return HttpResponse('Form Invalid')
   else:
-    formset = ProfileFormSet()
-  return render(request, 'users/edit_profile.html', {'formset' : formset})
+    user_form = UserEditForm(instance=request.user)
+    profile_form = ProfileEditForm(instance=request.user.profile)
+  return render(request, 'users/edit_profile.html', {'user_form' : user_form,
+  'profile_form': profile_form})
   
