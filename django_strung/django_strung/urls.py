@@ -22,6 +22,7 @@ from strung import views as strung_view
 
 urlpatterns = [
     path('', include('strung.urls')),
+    path('hangouts/', include('hangouts.urls')),
     path('users/', include('users.urls')),
     path('register/', users_view.register, name='register'),
     path('admin/', admin.site.urls),
