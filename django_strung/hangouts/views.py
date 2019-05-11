@@ -9,10 +9,12 @@ def create_hangout(request):
   if request.method == 'POST':
     form = HangoutForm(request.POST)
     if form.is_valid():
-      form.save()
+      hangout = form.save(commit=False)
+      hangout.author = request.user
+      hangout.save()
       messages.success(request, 'hangout created!')
 
-      return
+      return render(request, 'hangouts/create_hangout.html', {'form':form})
 
   else:
     form = HangoutForm()
