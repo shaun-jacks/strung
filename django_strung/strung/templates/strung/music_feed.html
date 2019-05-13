@@ -6,5 +6,16 @@
   <h1>Music Feed</h1>
   <p>Welcome to your feed.You can <a href="{% url "edit" %}">edit your profile</a> or <a href="{% url "password_change" %}">change your password</a>.</p>
 </p>
+{% if hangout_list %}
+  <ul>
+    {% for hangout in hangout_list %}
+      <li>
+        <a href="#">{{ hangout.author.username }}</a> ({{hangout.description}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no hangouts.</p>
+{% endif %}     
   
 {% endblock content %}

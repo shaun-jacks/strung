@@ -4,4 +4,5 @@ from . import views
 
 urlpatterns = [
     path('create/', views.create_hangout, name='create-hangout'),
+    path('hangout_list/', views.HangoutListView.as_view(), name='hangout_list'),
 ]

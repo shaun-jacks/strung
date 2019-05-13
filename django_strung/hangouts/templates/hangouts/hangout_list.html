@@ -1,0 +1,16 @@
+{% extends "strung/base.html" %}
+
+{% block content %}
+  <h1>Hangout List</h1>
+  {% if hangout_list %}
+  <ul>
+    {% for hangout in hangout_list %}
+      <li>
+        <a href="#">{{ hangout.author.username }}</a> ({{hangout.description}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no hangouts.</p>
+  {% endif %}       
+{% endblock %}

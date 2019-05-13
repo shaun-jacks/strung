@@ -1,7 +1,8 @@
 from django.urls import path
 from . import views
+from hangouts import views as hangout_views
 
 urlpatterns = [
-  path('', views.music_feed, name='music_feed'),
+  path('', hangout_views.HangoutListView.as_view(), name='music_feed'),
   path('discover', views.discover, name='discover'),
 ]
