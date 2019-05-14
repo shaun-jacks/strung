@@ -23,6 +23,9 @@
       <li {% if section == "Profile" %}class="selected"{% endif %}>
             <a href="#">Profile</a>
       </li>
+      <li {% if section == "Create Hangout" %}class="selected"{% endif %}>
+          <a href="{% url 'create-hangout' %}">Create Hangout</a>
+    </li>
     </ul>
   {% endif %}
   <span class="user">

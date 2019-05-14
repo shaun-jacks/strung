@@ -5,10 +5,11 @@
 {% block content %}
   <h1>Music Feed</h1>
   <p>Welcome to your feed.You can <a href="{% url "edit" %}">edit your profile</a> or <a href="{% url "password_change" %}">change your password</a>.</p>
-  <h2>{{ object.author.username }}</h2> 
-  <h2>{{ object.description }}</h2>
-  <h2>{{ object.location }}</h2>
-  <h2>{{ object.date_of_event }}</h2>
-  <h2>{{ object.location }}</h2> 
+  <h1>{{ object.title }}</h1>
+  <li>{{ object.author.username }}</li> 
+  <li>{{ object.description }}</li> 
+  <li>{{ object.location }}</li> 
+  <li>{{ object.date_of_event }}</li> 
+  <li>{{ object.location }}</li> 
   
 {% endblock content %}

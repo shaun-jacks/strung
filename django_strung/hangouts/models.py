@@ -5,6 +5,7 @@ from users.models import Profile
 class Hangout(models.Model):
   author = models.ForeignKey(settings.AUTH_USER_MODEL, \
     on_delete = models.CASCADE)
+  title = models.CharField(max_length=30, blank=True, null=True)
   members = models.ManyToManyField(Profile)
   description = models.TextField(blank=True, null=True)
   location = models.CharField(max_length=100)
@@ -13,7 +14,7 @@ class Hangout(models.Model):
   date_of_event = models.DateTimeField()
 
   def __str__(self):
-    return self.author.username
+    return self.title
 
 class Comment(models.Model):
   author = models.ForeignKey(settings.AUTH_USER_MODEL, \
