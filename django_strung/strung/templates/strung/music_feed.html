@@ -10,7 +10,7 @@
   <ul>
     {% for hangout in hangout_list %}
       <li>
-        <a href="#">{{ hangout.author.username }}</a> ({{hangout.description}})
+        <a href="{% url 'hangout_detail' hangout.id %}">{{ hangout.author.username }}</a> ({{hangout.description}})
       </li>
     {% endfor %}
   </ul>

@@ -3,7 +3,7 @@ from django.shortcuts import render
 from .forms import HangoutForm
 from .models import Hangout
 from django.contrib import messages
-from django.views.generic.list import ListView
+from django.views.generic import ListView, DetailView
 
 def create_hangout(request):
   if request.method == 'POST':
@@ -28,3 +28,6 @@ class HangoutListView(ListView):
   model = Hangout
   ordering = ['-created_on']
   template_name = 'strung/music_feed.html'
+
+class HangoutDetailView(DetailView):
+  model = Hangout
